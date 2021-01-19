@@ -57,5 +57,5 @@ containers:
 - `helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/`
 - `helm repo update`
 - `helm install jupyterhub jupyterhub/jupyterhub --values values.yml --namespace=jupiterhub`
-#### For more about authentications got to [documentation](https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-management.html#authenticating-users) of jupyterhub
+#### For more about authenticators got to [documentation](https://zero-to-jupyterhub.readthedocs.io/en/latest/jupyterhub/customizing/user-management.html#authenticating-users) of jupyterhub
 ### Reference from [arhea](https://www.arhea.net/posts/2020-06-18-jupyterhub-amazon-eks.html), [amazon](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html#ca-deploy), [Zero To Jupyterhub](https://zero-to-jupyterhub.readthedocs.io/en/latest/)

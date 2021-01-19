@@ -3,7 +3,7 @@
 ## Deploy eks and jupyterhub
 
 ### First install [eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) , [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [helm](https://helm.sh/docs/intro/install/)
-
+### Clone to repo with `git clone https://github.com/medicharlachiranjeevi/jupyterhub_to_eks.git`
 ### To deploy Eks cluster in aws
  - `eksctl create cluster -f ./cluster.yml`
 

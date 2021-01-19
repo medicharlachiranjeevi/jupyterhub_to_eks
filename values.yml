@@ -1,0 +1,58 @@
+proxy:
+  secretToken: <***token***>
+  https:
+    enabled: true
+    type: offload
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:us-east-2:*****:certificate/*******"
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+
+
+hub:
+  config:
+    Authenticator:
+      admin_users:
+        - user1  
+    DummyAuthenticator:
+      password: ******
+    JupyterHub:
+      authenticator_class: dummy
+  extraConfig: 
+    JupyterHub-headers: |
+                      c.JupyterHub.tornado_settings = {'headers': {'Content-Security-Policy': "frame-ancestors * 'self' " ,'Access-Control-Allow-Origin': '*','Access-Control-Allow-Methods':'*','Access-Control-Allow-Headers':'*','Access-Control-Allow-Credentials':'true'}}
+    Jupyternotebook-header-cross: |
+                      c.Spawner.args = [f'--NotebookApp.allow_origin=*']
+
+singleuser:
+  memory:
+    limit: 250M
+    guarantee: 250M
+  cpu:
+    limit: 0.5
+    guarantee: 0.01
+  storage:
+    capacity: 4Gi
+    dynamic:
+      storageClass: gp2
+  extraEnv:
+      GRANT_SUDO: "yes"
+      EDITOR: "nano"
+
+  uid: 0
+  cmd: null
+  lifecycleHooks:
+    postStart:
+      exec:
+        command: 
+          - "sh"
+          - "-c"
+          - >
+            if [ ! -f ~/.jupyter/custom/custom.js ]; then
+            git clone https://github.com/medicharlachiranjeevi/customjs.git ~/.jupyter;
+            fi;
+            echo c.NotebookApp.tornado_settings = {\'headers\': {\'Content-Security-Policy\': \"frame-ancestors '*' 'self' \"}} | cat > ~/.jupyter/jupyter_notebook_config.py
+
+

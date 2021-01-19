@@ -50,9 +50,12 @@ singleuser:
           - "sh"
           - "-c"
           - >
-            if [ ! -f ~/.jupyter/custom/custom.js ]; then
-            git clone https://github.com/medicharlachiranjeevi/customjs.git ~/.jupyter;
-            fi;
-            echo c.NotebookApp.tornado_settings = {\'headers\': {\'Content-Security-Policy\': \"frame-ancestors '*' 'self' \"}} | cat > ~/.jupyter/jupyter_notebook_config.py
-
-
+            mkdir -p ~/.jupyter/;
+            mkdir -p ~/.jupyter/custom/;      
+            echo c.NotebookApp.tornado_settings = {\'headers\': {\'Content-Security-Policy\': \"frame-ancestors '*' 'self' \"}} | cat > ~/.jupyter/jupyter_notebook_config.py;
+            cat > ~/.jupyter/custom/custom.js <<EOF
+                \$('a').attr('target', '_self');
+                require(["base/js/namespace"], function (Jupyter) {
+                 Jupyter._target = '_self';
+                });
+            EOF

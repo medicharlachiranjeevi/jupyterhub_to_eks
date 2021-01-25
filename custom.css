@@ -1,11 +1,4 @@
-#ipython_notebook img{                                                                                        
-    display:block;
-    /* logo url here */
-    background: url("https://greycampus.s3.amazonaws.com/assets/Group-cf750a6b5247b8db3f2becf3f550d5ad.svg") no-repeat;
-    background-size: contain;
-    width: 233px;
-    height: 33px;
-    padding-left: 233px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+$('a').attr('target', '_self');
+require(["base/js/namespace"], function (Jupyter) {
+Jupyter._target = '_self';
+});
